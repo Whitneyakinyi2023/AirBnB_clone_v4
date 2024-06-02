@@ -10,9 +10,6 @@ from flask import Flask, render_template
 import uuid
 app = Flask(__name__)
 
-# app.jinja_env.trim_blocks = True
-# app.jinja_env.lstrip_blocks = True
-
 
 @app.teardown_appcontext
 def close_db(error):
@@ -20,7 +17,7 @@ def close_db(error):
     storage.close()
 
 
-@app.route('/0-hbnb', strict_slashes=False)
+@app.route('/2-hbnb', strict_slashes=False)
 def hbnb():
     """ HBNB is alive! """
     states = storage.all(State).values()
@@ -36,7 +33,7 @@ def hbnb():
     places = storage.all(Place).values()
     places = sorted(places, key=lambda k: k.name)
 
-    return render_template('0-hbnb.html',
+    return render_template('2-hbnb.html',
                            states=st_ct,
                            amenities=amenities,
                            places=places,
