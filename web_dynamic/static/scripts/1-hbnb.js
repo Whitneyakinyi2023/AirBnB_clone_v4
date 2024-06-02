@@ -1,17 +1,20 @@
 #!/usr/bin/node
-// JS code that Listen for changes on each input checkbox tag
+// JS code that listens for changes on each input checkbox tag
 
-document.addEvetListener('DOMContentLoaded', (event) => {
-    const amenityIDlist = [];
+document.addEventListener('DOMContentLoaded', (event) => {
     const amenityDict = {};
-    $('input:checkbox').click(function () {
-        if $(this).is(':checked')) {
-            amenityDict[$(this).attr('data-id')] = $(this).attr('data-name');
-            amenityIDlist = Object.keys(amenityDict);
-            const vals = Object.values(amenityDict);
-            $('DIV.amenities h4').append(vals);
+
+    $('input:checkbox').change(function () {
+        const dataId = $(this).attr('data-id');
+        const dataName = $(this).attr('data-name');
+
+        if ($(this).is(':checked')) {
+            amenityDict[dataId] = dataName;
         } else {
-            delete amenityDict[$(this).attr('data-id')];
+            delete amenityDict[dataId];
         }
-    })
+
+        const amenityNames = Object.values(amenityDict).join(', ');
+        $('DIV.amenities h4').text(amenityNames);
+    });
 });
